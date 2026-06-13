@@ -1,0 +1,39 @@
+.chat-page{
+
+    height:100vh;
+
+    width:100vw;
+
+    display:flex;
+
+    background:#111b21;
+
+    color:white;
+
+}
+
+
+
+.chat-area{
+
+    flex:1;
+
+    display:flex;
+
+}
+
+
+
+.empty-chat{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+}

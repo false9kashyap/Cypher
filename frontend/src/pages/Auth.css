@@ -1,0 +1,292 @@
+.auth-page{
+
+    height:100vh;
+
+    width:100%;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    background:
+
+    radial-gradient(
+
+        circle at top,
+
+        #312e81,
+
+        #020617 45%
+
+    );
+
+}
+
+
+
+
+.auth-card{
+
+
+    width:380px;
+
+
+    padding:45px;
+
+
+    border-radius:30px;
+
+
+    background:
+
+    rgba(15,23,42,0.85);
+
+
+    border:1px solid #334155;
+
+
+    backdrop-filter:blur(20px);
+
+
+    box-shadow:
+
+    0 20px 60px rgba(0,0,0,0.6);
+
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+
+
+    animation:pop .3s ease;
+
+}
+
+
+
+
+
+@keyframes pop{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+
+
+.auth-card h1{
+
+    text-align:center;
+
+
+    letter-spacing:12px;
+
+
+    color:#a855f7;
+
+
+    margin:0;
+
+
+    font-size:35px;
+
+}
+
+
+
+
+
+.auth-card h2{
+
+
+    text-align:center;
+
+    color:white;
+
+
+    margin:0;
+
+}
+
+
+
+
+.auth-card p{
+
+
+    text-align:center;
+
+
+    color:#94a3b8;
+
+
+    margin-bottom:15px;
+
+}
+
+
+
+
+
+
+
+.auth-card input{
+
+
+    height:50px;
+
+
+    border:none;
+
+
+    outline:none;
+
+
+    padding:0 18px;
+
+
+    border-radius:18px;
+
+
+    background:#1e293b;
+
+
+    color:white;
+
+
+    font-size:15px;
+
+
+}
+
+
+
+
+
+.auth-card input:focus{
+
+
+    border:1px solid #8b5cf6;
+
+
+}
+
+
+
+
+
+
+
+.auth-card button{
+
+
+    height:50px;
+
+
+    border:none;
+
+
+    border-radius:20px;
+
+
+    cursor:pointer;
+
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #7c3aed,
+
+        #9333ea
+
+    );
+
+
+    color:white;
+
+
+    font-size:17px;
+
+
+    transition:.2s;
+
+
+}
+
+
+
+
+
+
+.auth-card button:hover{
+
+
+    transform:scale(1.05);
+
+
+}
+
+
+
+
+
+
+.auth-card span{
+
+
+    text-align:center;
+
+
+    color:#94a3b8;
+
+
+}
+
+
+
+
+
+.auth-card a{
+
+
+    margin-left:8px;
+
+
+    color:#a855f7;
+
+
+    text-decoration:none;
+
+
+    font-weight:bold;
+
+}

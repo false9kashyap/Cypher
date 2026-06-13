@@ -1,0 +1,656 @@
+.chat-box{
+
+    width:100%;
+    height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:20px 40px;
+
+    box-sizing:border-box;
+
+}
+
+
+
+
+/* ================= HEADER ================= */
+
+
+.chat-header{
+
+    height:75px;
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    padding:0 25px;
+
+    margin-bottom:15px;
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #1e293b,
+
+        #312e81
+
+    );
+
+
+    border:1px solid #334155;
+
+    border-radius:22px;
+
+
+    box-shadow:
+
+    0 10px 30px rgba(0,0,0,0.45);
+
+}
+
+
+
+.chat-header .avatar{
+
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #8b5cf6,
+
+        #a855f7
+
+    );
+
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+
+
+
+.chat-header h2{
+
+    margin:0;
+
+    font-size:20px;
+
+    color:white;
+
+}
+
+
+
+
+.chat-header p{
+
+    margin:0;
+
+    margin-top:5px;
+
+    font-size:14px;
+
+    color:#cbd5e1;
+
+}
+
+
+
+
+
+
+
+
+
+
+/* ================= MESSAGES ================= */
+
+
+.messages{
+
+    flex:1;
+
+    width:100%;
+
+    overflow-y:auto;
+
+
+    display:flex;
+
+    flex-direction:column;
+
+
+    gap:14px;
+
+
+    padding:25px;
+
+
+    box-sizing:border-box;
+
+
+    background:#0f172a;
+
+
+    border:1px solid #1e293b;
+
+
+    border-radius:22px;
+
+
+    scroll-behavior:smooth;
+
+}
+
+
+
+
+
+
+
+
+.message{
+
+
+    width:fit-content;
+
+
+    max-width:55%;
+
+
+    padding:12px 18px;
+
+
+    border-radius:18px;
+
+
+    word-break:break-word;
+
+
+    font-size:16px;
+
+
+    box-shadow:
+
+    0 8px 25px rgba(0,0,0,0.3);
+
+
+    animation:pop 0.15s ease;
+
+}
+
+
+
+
+
+
+
+@keyframes pop{
+
+
+    from{
+
+        opacity:0;
+
+        transform:scale(0.95);
+
+    }
+
+
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+
+
+
+
+
+
+.mine{
+
+    align-self:flex-end;
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #7c3aed,
+
+        #9333ea
+
+    );
+
+
+    color:white;
+
+
+    border-bottom-right-radius:5px;
+
+}
+
+
+
+
+
+
+
+
+.other{
+
+    align-self:flex-start;
+
+
+    background:#273449;
+
+
+    color:white;
+
+
+    border-bottom-left-radius:5px;
+
+}
+
+
+
+
+
+
+
+
+.time{
+
+
+    font-size:11px;
+
+
+    margin-top:7px;
+
+
+    text-align:right;
+
+
+    opacity:0.75;
+
+
+    color:#d1d5db;
+
+}
+
+
+
+
+
+
+
+
+
+/* =============== DATE SEPARATOR =============== */
+
+
+.date-separator{
+
+
+    align-self:center;
+
+
+    background:#1e293b;
+
+
+    color:#cbd5e1;
+
+
+    padding:7px 18px;
+
+
+    border-radius:20px;
+
+
+    font-size:13px;
+
+
+    margin:10px 0;
+
+
+    border:1px solid #334155;
+
+}
+
+
+
+
+
+
+
+
+
+/* =============== EMPTY CHAT =============== */
+
+
+.empty-chat{
+
+
+    margin:auto;
+
+
+    color:#64748b;
+
+
+    font-size:22px;
+
+
+    font-weight:500;
+
+
+    opacity:0.8;
+
+}
+
+
+
+
+
+
+
+
+
+/* ================= INPUT ================= */
+
+
+.input-box{
+
+
+    height:70px;
+
+
+    margin-top:15px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:12px;
+
+
+    padding:10px 15px;
+
+
+    position:relative;
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #1e293b,
+
+        #111827
+
+    );
+
+
+    border:1px solid #334155;
+
+
+    border-radius:25px;
+
+
+    box-shadow:
+
+    0 -5px 25px rgba(0,0,0,0.35);
+
+}
+
+
+
+
+
+
+
+
+.input-box input{
+
+
+    flex:1;
+
+
+    height:45px;
+
+
+    padding:0 20px;
+
+
+    border:none;
+
+
+    outline:none;
+
+
+    border-radius:20px;
+
+
+    background:#273449;
+
+
+    color:white;
+
+
+    font-size:15px;
+
+}
+
+
+
+.input-box input::placeholder{
+
+
+    color:#94a3b8;
+
+}
+
+
+
+
+
+
+
+
+
+.input-box button{
+
+
+    width:65px;
+
+
+    height:45px;
+
+
+    border:none;
+
+
+    cursor:pointer;
+
+
+    border-radius:25px;
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #8b5cf6,
+
+        #9333ea
+
+    );
+
+
+    color:white;
+
+
+    font-size:16px;
+
+
+    transition:0.2s;
+
+}
+
+
+
+
+
+.input-box button:hover{
+
+    transform:scale(1.08);
+
+}
+
+
+
+
+
+
+
+
+
+/* ================= EMOJI ================= */
+
+
+.emoji-btn{
+
+
+    width:45px !important;
+
+
+    height:45px !important;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    font-size:22px !important;
+
+}
+
+
+
+
+
+
+.emoji-box{
+
+
+    position:absolute;
+
+
+    bottom:85px;
+
+
+    left:15px;
+
+
+    z-index:999;
+
+
+    border-radius:20px;
+
+
+    overflow:hidden;
+
+
+    box-shadow:
+
+    0 10px 40px rgba(0,0,0,0.6);
+
+}
+
+
+
+
+
+
+
+
+
+/* ================= SCROLLBAR ================= */
+
+
+.messages::-webkit-scrollbar{
+
+
+    width:7px;
+
+}
+
+
+
+.messages::-webkit-scrollbar-thumb{
+
+
+    background:#64748b;
+
+
+    border-radius:20px;
+
+}
+
+
+
+
+.messages::-webkit-scrollbar-track{
+
+
+    background:#111827;
+
+
+    border-radius:20px;
+
+}

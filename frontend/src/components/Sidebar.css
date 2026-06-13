@@ -1,0 +1,539 @@
+.sidebar{
+
+    width:320px;
+
+    height:100vh;
+
+    background:#0f172a;
+
+    padding:25px;
+
+    box-sizing:border-box;
+
+    border-right:1px solid #1e293b;
+
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+
+
+
+
+.logo{
+
+    font-size:28px;
+
+    color:#a855f7;
+
+    margin-bottom:25px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ================= SEARCH ================= */
+
+
+.search{
+
+    width:100%;
+
+
+    padding:14px 18px;
+
+
+    box-sizing:border-box;
+
+
+    border:none;
+
+
+    outline:none;
+
+
+    border-radius:18px;
+
+
+    background:#1e293b;
+
+
+    color:white;
+
+
+    font-size:15px;
+
+
+    margin-bottom:25px;
+
+
+    border:1px solid #334155;
+
+}
+
+
+
+.search::placeholder{
+
+    color:#94a3b8;
+
+}
+
+
+
+.search:focus{
+
+    border-color:#8b5cf6;
+
+
+    box-shadow:
+
+    0 0 20px rgba(139,92,246,0.25);
+
+}
+
+
+
+
+
+
+
+
+
+/* ================= CHAT LIST ================= */
+
+
+.chat-list{
+
+
+    flex:1;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:15px;
+
+
+    overflow-y:auto;
+
+}
+
+
+
+
+.chat-list::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+
+
+
+
+
+
+
+
+.chat-card{
+
+
+    position:relative;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:15px;
+
+
+
+    padding:15px;
+
+
+
+    border-radius:18px;
+
+
+
+    background:#111827;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:0.2s;
+
+
+
+    border:1px solid transparent;
+
+}
+
+
+
+
+
+
+
+
+
+.chat-card:hover{
+
+
+    background:#1f2937;
+
+
+    transform:translateX(5px);
+
+
+    border-color:#334155;
+
+}
+
+
+
+
+
+
+
+
+
+.avatar{
+
+
+    height:45px;
+
+
+    min-width:45px;
+
+
+    border-radius:50%;
+
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #7c3aed,
+
+        #9333ea
+
+    );
+
+
+
+    color:white;
+
+
+
+    font-weight:bold;
+
+
+    box-shadow:
+
+    0 0 15px rgba(168,85,247,0.35);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+.chat-info{
+
+
+    flex:1;
+
+
+    overflow:hidden;
+
+}
+
+
+
+
+
+
+.chat-card h3{
+
+
+    margin:0;
+
+
+    font-size:17px;
+
+
+    color:white;
+
+
+    overflow:hidden;
+
+
+    white-space:nowrap;
+
+
+    text-overflow:ellipsis;
+
+}
+
+
+
+
+
+
+
+
+
+.chat-card p{
+
+
+    margin-top:5px;
+
+
+    color:#9ca3af;
+
+
+    font-size:13px;
+
+
+
+    overflow:hidden;
+
+
+    white-space:nowrap;
+
+
+    text-overflow:ellipsis;
+
+}
+
+
+
+
+
+
+
+
+
+/* ================= UNREAD BADGE ================= */
+
+
+.unread-badge{
+
+
+    min-width:22px;
+
+
+    height:22px;
+
+
+    padding:0 6px;
+
+
+    border-radius:50px;
+
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #8b5cf6,
+
+        #a855f7
+
+    );
+
+
+
+    color:white;
+
+
+
+    font-size:12px;
+
+
+    font-weight:bold;
+
+
+
+    box-shadow:
+
+    0 0 15px rgba(168,85,247,0.6);
+
+}
+
+
+
+
+
+
+
+
+
+/* ================= LOGOUT ================= */
+
+
+.logout-section{
+
+
+    margin-top:20px;
+
+
+}
+
+
+
+
+.logout-btn{
+
+
+    width:100%;
+
+
+    height:50px;
+
+
+    border:none;
+
+
+    border-radius:18px;
+
+
+    cursor:pointer;
+
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #7c3aed,
+
+        #9333ea
+
+    );
+
+
+
+    color:white;
+
+
+    font-size:16px;
+
+
+    font-weight:bold;
+
+
+
+    transition:0.2s;
+
+
+}
+
+
+
+
+
+.logout-btn:hover{
+
+
+    transform:translateY(-3px);
+
+
+    
+
+}
+
+
+
+
+
+
+
+
+
+/* ================= MOBILE ================= */
+
+
+@media(max-width:700px){
+
+
+    .sidebar{
+
+
+        width:100%;
+
+
+    }
+
+
+}
+
+
+.logout-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
