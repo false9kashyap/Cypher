@@ -10,22 +10,50 @@ app = FastAPI(
 )
 
 
+# =========================
 # CORS
+# =========================
+
+origins = [
+
+    "http://localhost:5173",
+
+    # add Vercel frontend URL later here
+
+]
+
+
 app.add_middleware(
+
     CORSMiddleware,
-    allow_origins=["*"],
+
+    allow_origins=origins,
+
     allow_credentials=True,
+
     allow_methods=["*"],
+
     allow_headers=["*"],
+
 )
 
 
-# Routes
+
+# =========================
+# ROUTES
+# =========================
+
 app.include_router(auth.router)
+
 app.include_router(user.router)
+
 app.include_router(chat.router)
+
 app.include_router(message.router)
+
 app.include_router(ws.router)
+
+
 
 
 
@@ -33,18 +61,29 @@ app.include_router(ws.router)
 async def root():
 
     return {
-        "status": "CYPHER ONLINE",
-        "message": "secure channel initialized"
+
+        "status":"CYPHER ONLINE",
+
+        "message":"secure channel initialized"
+
     }
+
+
+
 
 
 
 @app.get("/db")
 async def check_database():
 
+
     collections = await database.list_collection_names()
 
+
     return {
-        "status": "DATABASE LINK ACTIVE",
-        "collections": collections
+
+        "status":"DATABASE LINK ACTIVE",
+
+        "collections":collections
+
     }

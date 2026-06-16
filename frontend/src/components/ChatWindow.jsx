@@ -43,7 +43,6 @@ function ChatWindow({ chat }) {
 
 
 
-
     useEffect(()=>{
 
 
@@ -62,11 +61,26 @@ function ChatWindow({ chat }) {
 
 
 
+        const WS_URL =
+
+        import.meta.env.VITE_WS_URL
+
+        ||
+
+        "ws://127.0.0.1:8000";
+
+
+
+
+
+
+
         socket.current = new WebSocket(
 
-            `ws://127.0.0.1:8000/ws/${chat.id}/${user.id}`
+            `${WS_URL}/ws/${chat.id}/${user.id}`
 
         );
+
 
 
 
@@ -101,11 +115,14 @@ function ChatWindow({ chat }) {
 
 
 
+
+
         socket.current.onmessage=(event)=>{
 
 
 
             const data = JSON.parse(event.data);
+
 
 
 
@@ -123,6 +140,7 @@ function ChatWindow({ chat }) {
                     prev=>[...prev,data]
 
                 );
+
 
 
 
@@ -150,6 +168,8 @@ function ChatWindow({ chat }) {
 
 
             }
+
+
 
 
 
@@ -211,6 +231,8 @@ function ChatWindow({ chat }) {
 
 
 
+
+
             if(data.type==="read_chat"){
 
 
@@ -249,6 +271,8 @@ function ChatWindow({ chat }) {
 
 
             }
+
+
 
 
 
@@ -302,7 +326,6 @@ function ChatWindow({ chat }) {
 
 
     },[chat.id,user.id]);
-
 
 
 
@@ -387,6 +410,7 @@ function ChatWindow({ chat }) {
 
 
 
+
         if(socket.current?.readyState===1){
 
 
@@ -406,6 +430,7 @@ function ChatWindow({ chat }) {
 
 
         }
+
 
 
 
@@ -464,6 +489,7 @@ function ChatWindow({ chat }) {
 
 
 
+
     const addEmoji=(emoji)=>{
 
 
@@ -489,6 +515,7 @@ function ChatWindow({ chat }) {
 
 
 
+
     const sendMessage=()=>{
 
 
@@ -498,6 +525,7 @@ function ChatWindow({ chat }) {
             return;
 
         }
+
 
 
 
@@ -575,6 +603,7 @@ function ChatWindow({ chat }) {
 
 
 
+
                 <div>
 
 
@@ -587,21 +616,10 @@ function ChatWindow({ chat }) {
 
 
 
+
                     <p>
 
-                        {
-
-                        isTyping
-
-                        ?
-
-                        "typing..."
-
-                        :
-
-                        ""
-
-                        }
+                    {isTyping ? "typing..." : ""}
 
                     </p>
 
@@ -629,7 +647,6 @@ function ChatWindow({ chat }) {
 
 
 
-
             {
 
             messages.map((msg,index)=>{
@@ -638,7 +655,14 @@ function ChatWindow({ chat }) {
 
                 const mine =
 
-                String(msg.sender)===String(user.id);
+                String(msg.sender)
+
+                ===
+
+                String(user.id);
+
+
+
 
 
 
@@ -664,13 +688,27 @@ function ChatWindow({ chat }) {
 
                     key={msg.id || index}
 
-                    className={mine ? "message mine" : "message other"}
+                    className={
+
+                        mine
+
+                        ?
+
+                        "message mine"
+
+                        :
+
+                        "message other"
+
+                    }
 
                     >
 
 
 
+
                         {msg.text}
+
 
 
 
@@ -684,7 +722,6 @@ function ChatWindow({ chat }) {
                         {
 
                         time &&
-
 
                         time.toLocaleTimeString(
 
@@ -726,6 +763,7 @@ function ChatWindow({ chat }) {
                         }
 
 
+
                         </div>
 
 
@@ -748,6 +786,7 @@ function ChatWindow({ chat }) {
 
 
             <div ref={bottomRef}></div>
+
 
 
 
@@ -785,7 +824,6 @@ function ChatWindow({ chat }) {
 
 
 
-
                 {
 
                 showEmoji &&
@@ -806,7 +844,6 @@ function ChatWindow({ chat }) {
                 </div>
 
                 }
-
 
 
 
@@ -841,11 +878,13 @@ function ChatWindow({ chat }) {
 
 
 
+
                 <button onClick={sendMessage}>
 
                     Send
 
                 </button>
+
 
 
 
@@ -864,6 +903,8 @@ function ChatWindow({ chat }) {
 
 
 }
+
+
 
 
 
