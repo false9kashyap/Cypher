@@ -40,8 +40,6 @@ class ConnectionManager:
 
 
 
-
-
     async def connect(
 
         self,
@@ -67,7 +65,7 @@ class ConnectionManager:
 
             self.active_connections[chat_id]=[]
 
-
+        
 
 
 
@@ -79,7 +77,6 @@ class ConnectionManager:
             websocket
 
         )
-
 
 
 
@@ -151,6 +148,7 @@ class ConnectionManager:
 
 
 
+
         for connection in self.active_connections.get(
 
             chat_id,
@@ -189,8 +187,6 @@ class ConnectionManager:
 
 
 
-
-
         for connection in disconnected:
 
 
@@ -211,11 +207,7 @@ class ConnectionManager:
 
 
 
-
-
 manager = ConnectionManager()
-
-
 
 
 
@@ -243,6 +235,39 @@ async def websocket_endpoint(
 
 
 
+    # =========================
+    # RENDER WEBSOCKET ORIGIN FIX
+    # =========================
+
+    origin = websocket.headers.get("origin")
+
+
+    allowed_origins = [
+
+        "https://cypher-ygid.onrender.com",
+
+        "http://localhost:5173"
+
+    ]
+
+
+    if origin not in allowed_origins:
+
+
+        await websocket.close(
+
+            code=1008
+
+        )
+
+
+        return
+
+
+
+
+
+
 
     await manager.connect(
 
@@ -251,7 +276,6 @@ async def websocket_endpoint(
         websocket
 
     )
-
 
 
 
@@ -272,8 +296,6 @@ async def websocket_endpoint(
 
 
             data = await websocket.receive_json()
-
-
 
 
 
@@ -327,7 +349,6 @@ async def websocket_endpoint(
 
 
 
-
                 await manager.broadcast(
 
                     chat_id,
@@ -348,8 +369,6 @@ async def websocket_endpoint(
 
 
                 continue
-
-
 
 
 
@@ -494,7 +513,6 @@ async def websocket_endpoint(
 
 
 
-
             # ================= MESSAGE =================
 
 
@@ -545,15 +563,11 @@ async def websocket_endpoint(
 
 
 
-
-
                 result = await database.messages.insert_one(
 
                     new_message
 
                 )
-
-
 
 
 
