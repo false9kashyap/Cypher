@@ -45,7 +45,13 @@ function ChatWindow({ chat }) {
     useEffect(()=>{
 
 
-        if(!chat?.id || !user?.id){
+        const chatId = chat?.id || chat?._id;
+
+        const userId = user?.id || user?._id;
+
+
+
+        if(!chatId || !userId){
 
             return;
 
@@ -53,28 +59,19 @@ function ChatWindow({ chat }) {
 
 
 
-        loadMessages();
+        loadMessages(chatId);
 
 
 
-        const WS_URL =
-
-        import.meta.env.VITE_WS_URL
-
-        ||
-
-        "ws://127.0.0.1:8000";
-
-
+        const WS_URL = import.meta.env.VITE_WS_URL;
 
 
 
         socket.current = new WebSocket(
 
-            `${WS_URL}/ws/${chat.id}/${user.id}`
+            `${WS_URL}/ws/${chatId}/${userId}`
 
         );
-
 
 
 
@@ -105,12 +102,10 @@ function ChatWindow({ chat }) {
 
 
 
-
         socket.current.onmessage=(event)=>{
 
 
             const data = JSON.parse(event.data);
-
 
 
 
@@ -130,7 +125,7 @@ function ChatWindow({ chat }) {
 
 
 
-                if(String(data.sender)!==String(user.id)){
+                if(String(data.sender)!==String(userId)){
 
 
                     socket.current.send(
@@ -148,7 +143,6 @@ function ChatWindow({ chat }) {
                 }
 
             }
-
 
 
 
@@ -207,7 +201,6 @@ function ChatWindow({ chat }) {
 
 
 
-
             if(data.type==="read_chat"){
 
 
@@ -248,11 +241,10 @@ function ChatWindow({ chat }) {
 
 
 
-
             if(data.type==="typing"){
 
 
-                if(String(data.sender)!==String(user.id)){
+                if(String(data.sender)!==String(userId)){
 
 
                     setIsTyping(
@@ -295,7 +287,7 @@ function ChatWindow({ chat }) {
 
 
 
-    },[chat?.id,user?.id]);
+    },[chat,user]);
 
 
 
@@ -305,32 +297,12 @@ function ChatWindow({ chat }) {
 
 
 
-    useEffect(()=>{
-
-
-        bottomRef.current?.scrollIntoView({
-
-            behavior:"smooth"
-
-        });
-
-
-    },[messages]);
-
-
-
-
-
-
-
-
-
-    const loadMessages=async()=>{
+    const loadMessages=async(chatId)=>{
 
 
         const res = await API.get(
 
-            `/message/${chat.id}`
+            `/message/${chatId}`
 
         );
 
@@ -343,7 +315,6 @@ function ChatWindow({ chat }) {
 
 
     };
-
 
 
 
@@ -388,14 +359,11 @@ function ChatWindow({ chat }) {
 
 
 
-
-
         clearTimeout(
 
             typingTimeout.current
 
         );
-
 
 
 
@@ -457,7 +425,6 @@ function ChatWindow({ chat }) {
 
 
 
-
     const sendMessage=()=>{
 
 
@@ -466,8 +433,6 @@ function ChatWindow({ chat }) {
             return;
 
         }
-
-
 
 
 
@@ -506,12 +471,9 @@ function ChatWindow({ chat }) {
 
 
 
-
     return(
 
         <div className="chat-box">
-
-
 
 
 
@@ -521,43 +483,25 @@ function ChatWindow({ chat }) {
                 <div className="avatar">
 
 
-                    {
-
-                    chat.otherUser?.username?.[0]
-                    .toUpperCase()
-
-                    }
+                    {chat.otherUser?.username?.[0]?.toUpperCase()}
 
 
                 </div>
 
 
-
-
-
                 <div>
 
 
-                    <h2>
-
-                        {chat.otherUser?.username}
-
-                    </h2>
+                    <h2>{chat.otherUser?.username}</h2>
 
 
-                    <p>
-
-                        {isTyping ? "typing..." : ""}
-
-                    </p>
+                    <p>{isTyping ? "typing..." : ""}</p>
 
 
                 </div>
 
 
             </div>
-
-
 
 
 
@@ -576,15 +520,16 @@ function ChatWindow({ chat }) {
             messages.map((msg,index)=>{
 
 
+                const userId = user?.id || user?._id;
+
+
                 const mine =
 
                 String(msg.sender)
 
                 ===
 
-                String(user.id);
-
-
+                String(userId);
 
 
 
@@ -602,13 +547,12 @@ function ChatWindow({ chat }) {
 
 
 
-
                 return(
 
 
                     <div
 
-                    key={msg.id || index}
+                    key={msg.id || msg._id || index}
 
                     className={mine ? "message mine" : "message other"}
 
@@ -616,7 +560,6 @@ function ChatWindow({ chat }) {
 
 
                         {msg.text}
-
 
 
 
@@ -717,7 +660,6 @@ function ChatWindow({ chat }) {
 
 
 
-
                 {
 
                 showEmoji &&
@@ -738,7 +680,6 @@ function ChatWindow({ chat }) {
                 </div>
 
                 }
-
 
 
 
@@ -767,7 +708,6 @@ function ChatWindow({ chat }) {
                 }}
 
                 />
-
 
 
 
