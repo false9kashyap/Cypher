@@ -9,16 +9,15 @@ Built using React.js, FastAPI, MongoDB, and WebSockets.
 
 https://cypher-ygid.onrender.com
 
-
 ## Screenshots
 
 ### Login Page
 
-![Login](screenshots/login.png)
+<img src="screenshots/login.png" width="700"/>
 
 ### Chat Interface
 
-![Chat](screenshots/chat.png)
+<img src="screenshots/chat.png" width="700"/>
 
 
 ## Features
