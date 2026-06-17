@@ -18,7 +18,7 @@ origins = [
 
     "http://localhost:5173",
 
-    # add Vercel frontend URL later here
+    "https://cypher-ygid.onrender.com"
 
 ]
 
@@ -36,8 +36,6 @@ app.add_middleware(
     allow_headers=["*"],
 
 )
-
-
 
 # =========================
 # ROUTES
