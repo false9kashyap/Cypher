@@ -11,14 +11,16 @@ app = FastAPI(
 
 
 # =========================
-# CORS
+# CORS CONFIG
 # =========================
 
 origins = [
 
+    # Local React development
     "http://localhost:5173",
 
-    "https://cypher-ygid.onrender.com"
+    # Render frontend
+    "https://cypher-ygid.onrender.com",
 
 ]
 
@@ -37,6 +39,7 @@ app.add_middleware(
 
 )
 
+
 # =========================
 # ROUTES
 # =========================
@@ -52,36 +55,32 @@ app.include_router(message.router)
 app.include_router(ws.router)
 
 
-
-
+# =========================
+# HEALTH CHECK
+# =========================
 
 @app.get("/")
 async def root():
 
     return {
 
-        "status":"CYPHER ONLINE",
+        "status": "CYPHER ONLINE",
 
-        "message":"secure channel initialized"
+        "message": "secure channel initialized"
 
     }
-
-
-
 
 
 
 @app.get("/db")
 async def check_database():
 
-
     collections = await database.list_collection_names()
-
 
     return {
 
-        "status":"DATABASE LINK ACTIVE",
+        "status": "DATABASE LINK ACTIVE",
 
-        "collections":collections
+        "collections": collections
 
     }
