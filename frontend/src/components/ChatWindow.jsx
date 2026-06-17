@@ -15,9 +15,7 @@ import "./ChatWindow.css";
 function ChatWindow({ chat }) {
 
 
-
     const { user } = useAuth();
-
 
 
     const [messages,setMessages] = useState([]);
@@ -43,11 +41,11 @@ function ChatWindow({ chat }) {
 
 
 
+
     useEffect(()=>{
 
 
-
-        if(!chat || !user?.id){
+        if(!chat?.id || !user?.id){
 
             return;
 
@@ -55,9 +53,7 @@ function ChatWindow({ chat }) {
 
 
 
-
         loadMessages();
-
 
 
 
@@ -68,8 +64,6 @@ function ChatWindow({ chat }) {
         ||
 
         "ws://127.0.0.1:8000";
-
-
 
 
 
@@ -88,9 +82,7 @@ function ChatWindow({ chat }) {
 
 
 
-
         socket.current.onopen=()=>{
-
 
 
             socket.current.send(
@@ -104,10 +96,7 @@ function ChatWindow({ chat }) {
             );
 
 
-
         };
-
-
 
 
 
@@ -120,9 +109,7 @@ function ChatWindow({ chat }) {
         socket.current.onmessage=(event)=>{
 
 
-
             const data = JSON.parse(event.data);
-
 
 
 
@@ -134,15 +121,11 @@ function ChatWindow({ chat }) {
             if(data.type==="message"){
 
 
-
                 setMessages(
 
                     prev=>[...prev,data]
 
                 );
-
-
-
 
 
 
@@ -162,10 +145,7 @@ function ChatWindow({ chat }) {
 
                     );
 
-
                 }
-
-
 
             }
 
@@ -177,10 +157,7 @@ function ChatWindow({ chat }) {
 
 
 
-
-
             if(data.type==="read"){
-
 
 
                 setMessages(
@@ -196,6 +173,7 @@ function ChatWindow({ chat }) {
                         {
 
                             ...msg,
+
 
                             readBy:[
 
@@ -219,10 +197,7 @@ function ChatWindow({ chat }) {
 
                 );
 
-
-
             }
-
 
 
 
@@ -236,39 +211,32 @@ function ChatWindow({ chat }) {
             if(data.type==="read_chat"){
 
 
-
                 setMessages(
 
                     prev=>prev.map(
 
-                        msg=>(
+                        msg=>({
 
-                            {
-
-                                ...msg,
+                            ...msg,
 
 
-                                readBy:[
+                            readBy:[
 
-                                    ...new Set([
+                                ...new Set([
 
-                                        ...(msg.readBy || []),
+                                    ...(msg.readBy || []),
 
-                                        data.reader
+                                    data.reader
 
-                                    ])
+                                ])
 
-                                ]
+                            ]
 
-                            }
-
-                        )
+                        })
 
                     )
 
                 );
-
-
 
             }
 
@@ -281,9 +249,7 @@ function ChatWindow({ chat }) {
 
 
 
-
             if(data.type==="typing"){
-
 
 
                 if(String(data.sender)!==String(user.id)){
@@ -299,10 +265,7 @@ function ChatWindow({ chat }) {
                 }
 
 
-
             }
-
-
 
 
         };
@@ -318,6 +281,13 @@ function ChatWindow({ chat }) {
         return()=>{
 
 
+            clearTimeout(
+
+                typingTimeout.current
+
+            );
+
+
             socket.current?.close();
 
 
@@ -325,10 +295,7 @@ function ChatWindow({ chat }) {
 
 
 
-    },[chat.id,user.id]);
-
-
-
+    },[chat?.id,user?.id]);
 
 
 
@@ -341,13 +308,11 @@ function ChatWindow({ chat }) {
     useEffect(()=>{
 
 
-
         bottomRef.current?.scrollIntoView({
 
             behavior:"smooth"
 
         });
-
 
 
     },[messages]);
@@ -360,11 +325,7 @@ function ChatWindow({ chat }) {
 
 
 
-
-
-
     const loadMessages=async()=>{
-
 
 
         const res = await API.get(
@@ -374,13 +335,11 @@ function ChatWindow({ chat }) {
         );
 
 
-
         setMessages(
 
             res.data
 
         );
-
 
 
     };
@@ -395,9 +354,7 @@ function ChatWindow({ chat }) {
 
 
 
-
     const handleTyping=(e)=>{
-
 
 
         setText(
@@ -410,9 +367,7 @@ function ChatWindow({ chat }) {
 
 
 
-
         if(socket.current?.readyState===1){
-
 
 
             socket.current.send(
@@ -426,8 +381,6 @@ function ChatWindow({ chat }) {
                 })
 
             );
-
-
 
         }
 
@@ -451,7 +404,6 @@ function ChatWindow({ chat }) {
         typingTimeout.current=setTimeout(()=>{
 
 
-
             if(socket.current?.readyState===1){
 
 
@@ -467,18 +419,13 @@ function ChatWindow({ chat }) {
 
                 );
 
-
             }
-
 
 
         },1000);
 
 
-
     };
-
-
 
 
 
@@ -493,13 +440,11 @@ function ChatWindow({ chat }) {
     const addEmoji=(emoji)=>{
 
 
-
         setText(
 
             prev=>prev+emoji.emoji
 
         );
-
 
 
     };
@@ -513,11 +458,7 @@ function ChatWindow({ chat }) {
 
 
 
-
-
-
     const sendMessage=()=>{
-
 
 
         if(!text.trim()){
@@ -530,9 +471,7 @@ function ChatWindow({ chat }) {
 
 
 
-
         if(socket.current?.readyState===1){
-
 
 
             socket.current.send(
@@ -548,7 +487,6 @@ function ChatWindow({ chat }) {
             );
 
 
-
         }
 
 
@@ -558,10 +496,7 @@ function ChatWindow({ chat }) {
         setShowEmoji(false);
 
 
-
     };
-
-
 
 
 
@@ -580,10 +515,7 @@ function ChatWindow({ chat }) {
 
 
 
-
-
             <div className="chat-header">
-
 
 
                 <div className="avatar">
@@ -603,7 +535,6 @@ function ChatWindow({ chat }) {
 
 
 
-
                 <div>
 
 
@@ -614,12 +545,9 @@ function ChatWindow({ chat }) {
                     </h2>
 
 
-
-
-
                     <p>
 
-                    {isTyping ? "typing..." : ""}
+                        {isTyping ? "typing..." : ""}
 
                     </p>
 
@@ -627,9 +555,8 @@ function ChatWindow({ chat }) {
                 </div>
 
 
-
-
             </div>
+
 
 
 
@@ -643,14 +570,10 @@ function ChatWindow({ chat }) {
 
 
 
-
-
-
-
             {
 
-            messages.map((msg,index)=>{
 
+            messages.map((msg,index)=>{
 
 
                 const mine =
@@ -660,7 +583,6 @@ function ChatWindow({ chat }) {
                 ===
 
                 String(user.id);
-
 
 
 
@@ -688,23 +610,9 @@ function ChatWindow({ chat }) {
 
                     key={msg.id || index}
 
-                    className={
-
-                        mine
-
-                        ?
-
-                        "message mine"
-
-                        :
-
-                        "message other"
-
-                    }
+                    className={mine ? "message mine" : "message other"}
 
                     >
-
-
 
 
                         {msg.text}
@@ -713,10 +621,7 @@ function ChatWindow({ chat }) {
 
 
 
-
-
                         <div className="time">
-
 
 
                         {
@@ -741,7 +646,6 @@ function ChatWindow({ chat }) {
 
 
 
-
                         {
 
                         mine &&
@@ -763,10 +667,7 @@ function ChatWindow({ chat }) {
                         }
 
 
-
                         </div>
-
-
 
 
                     </div>
@@ -782,17 +683,10 @@ function ChatWindow({ chat }) {
 
 
 
-
-
-
             <div ref={bottomRef}></div>
 
 
-
-
-
             </div>
-
 
 
 
@@ -862,16 +756,17 @@ function ChatWindow({ chat }) {
 
                 onKeyDown={(e)=>{
 
+
                     if(e.key==="Enter"){
 
                         sendMessage();
 
                     }
 
+
                 }}
 
                 />
-
 
 
 
@@ -887,13 +782,7 @@ function ChatWindow({ chat }) {
 
 
 
-
-
-
             </div>
-
-
-
 
 
         </div>
@@ -901,9 +790,7 @@ function ChatWindow({ chat }) {
     );
 
 
-
 }
-
 
 
 
